@@ -42,7 +42,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+        'mongodb' => [ 'class' => '\yii\mongodb\Connection', 'dsn' => 'mongodb://localhost:27017/yii2-basic', ],
         'urlManager' => [
                 'class' => 'yii\web\UrlManager',
                 // Disable index.php
