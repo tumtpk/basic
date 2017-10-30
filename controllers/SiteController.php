@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\SignupForm;
+use app\models\User;
 
 class SiteController extends Controller
 {
@@ -122,5 +124,52 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    
+    public function actionSignup()
+    {
+    	$model = new SignupForm();
+    	if ($model->load(Yii::$app->request->post())) {
+    		if ($user = $model->signup()) {
+    			if (Yii::$app->getUser()->login($user)) {
+    				return $this->goHome();
+    			}
+    		}
+    	}
+    
+    	return $this->render('signup', [
+    			'model' => $model,
+    	]);
+    }
+    
+    public function actionFormsignup(){
+    	return $this->render('formsignup', []);
+    }
+    
+    public function actionSubmitsignup(){
+    	$request = Yii::$app->request;
+    	$username = $request->post('username',null);
+    	$email = $request->post('email',null);
+    	$password = $request->post('password',null);
+    	
+    	var_dump($username);
+    	var_dump($email);
+    	var_dump($password);
+    	
+    	$user = new User();
+    	$user->username = $username;
+    	$user->email = $email;
+    	$user->setPassword($password);
+    	$user->generateAuthKey();
+    	
+    	$user = $user->save() ? $user : null;
+    	
+    	if ($user != null) {
+    		if (Yii::$app->getUser()->login($user)) {
+    			return $this->goHome();
+    		}
+    	}else{
+    		return $this->goBack('site/formsignup');
+    	}
     }
 }

@@ -6,8 +6,9 @@ use app\models\Category;
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-	
-	<?php var_dump(Category::find()->all()); ?>
+
+	<a href="site/signup"><button>Singnup for yii2-form</button></a>
+	<a href="site/formsignup"><button>Singnup for html-form</button></a>
 
     <div class="jumbotron">
         <h1>Congratulations!</h1>

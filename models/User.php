@@ -53,6 +53,7 @@ const STATUS_DELETED = 0;
 				'password_reset_token',
 				'auth_key',
 				'role',
+				'email',
 				'status',
 				'created_at',
 				'updated_at',
