@@ -29,7 +29,7 @@ jobs:
       - run: sudo apt-get update
       - run: curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
-      - run: composer install -n --prefer-dist
+      - run: composer update
 
       - save_cache:
           paths:
